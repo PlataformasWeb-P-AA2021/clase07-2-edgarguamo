@@ -2,9 +2,9 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import and_ # se importa el operador and
 
-# se importa la clase(s) del 
+# se importa la clase(s) del
 # archivo genera_tablas
-from genera_tablas import * 
+from genera_tablas import *
 
 # se importa información del archivo configuracion
 from configuracion import cadena_base_datos
@@ -18,17 +18,23 @@ engine = create_engine(cadena_base_datos)
 Session = sessionmaker(bind=engine)
 session = Session()
 
-# Obtener todos los registros de 
-# la entidad estudiante (clase Estudiante) 
+# Obtener todos los registros de
+# la entidad estudiante (clase Estudiante)
 estudiantes = session.query(Estudiante).all()
 print(estudiantes)
-
-# Obtener todos los registros de la clase Modulo 
+for est in estudiantes:
+    print("Nombre: %s \n  Apellido: %s" % (est.nombre,est.apellido))
+print('----------------------')
+# Obtener todos los registros de la clase Modulo
 modulos = session.query(Modulo).all()
 print(modulos)
 
-# Obtener todos los registros de la clase Matricula 
+print('----------------------')
+# Obtener todos los registros de la clase Matricula
 matriculas = session.query(Matricula).all()
 print(matriculas)
 
+print('----------------------')
+for m in matriculas:
+    print("Nombre: %s \n  Apellido: %s" % (m.estudiante.nombre, m.estudiante.apellido))
 

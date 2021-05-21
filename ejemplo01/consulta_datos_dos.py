@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import and_ # se importa el operador and
 
-# se importa la clase(s) del 
+# se importa la clase(s) del
 # archivo genera_tablas
 from genera_tablas import *
 
@@ -19,7 +19,8 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 # Sacar las matriculas con su estudiante y módulo
-matriculas = session.query(Matricula, Estudiante, Modulo).join(Estudiante, Modulo).all()
+matriculas = session.query(Matricula, Estudiante, Modulo)\
+        .join(Estudiante, Modulo).filter(Modulo.nombre == 'Segundo').all()
 
 for m in matriculas:
     print(m)
